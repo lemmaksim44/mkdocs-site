@@ -1,0 +1,10 @@
+.bs-sidebar {
+  display: none !important;
+}
+
+.col-md-9 {
+    -webkit-box-flex: 0 !important;
+    -ms-flex: 0 0 100% !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+}
