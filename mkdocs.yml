@@ -1,6 +1,7 @@
-site_name: Лежанков Максим
+site_name: Site
 
 theme:
-  name: darkly
+  name: bootstrap
+  palette: darkly
 extra_css:
   - index.css
