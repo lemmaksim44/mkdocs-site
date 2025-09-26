@@ -1,7 +1,4 @@
 site_name: Site
 
-theme:
-  name: bootstrap
-  palette: darkly
 extra_css:
   - index.css
