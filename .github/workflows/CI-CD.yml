@@ -19,7 +19,7 @@ jobs:
           python-version: 3.12
         
       - name: MkDocs Setup
-        run: pip install mkdocs mkdocs-material
+        run: pip install mkdocs mkdocs-bootstrap
 
       - name: Build
         run: mkdocs build
