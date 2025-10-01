@@ -31,7 +31,7 @@ jobs:
           path: site/
   
   deploy:
-    name: Deploy
+    name: Deploy on helios
     runs-on: ubuntu-latest
     needs: build
 
@@ -54,3 +54,31 @@ jobs:
         run: scp -r -P 2222 -o StrictHostKeyChecking=no ./site/* \
           ${{ secrets.HELIOS_USER }}@${{ secrets.HELIOS_URL }}:/home/studs/${{ secrets.HELIOS_USER }}/public_html/
 
+  docker:
+    name: Create docker container
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: ./site
+      
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mkdocs-site:latest .
+
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/mkdocs-site:latest
