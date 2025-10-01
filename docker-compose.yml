@@ -1,0 +1,6 @@
+version: "3"
+services:
+  mkdocs:
+    image: ${{ secrets.DOCKERHUB_USERNAME }}/mkdocs-site:latest
+    ports:
+      - "80:80"
